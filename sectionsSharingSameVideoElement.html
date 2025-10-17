@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seções com Vídeo Compartilhado</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .section {
+      display: none;
+      padding: 20px;
+      border-bottom: 1px solid #333;
+    }
+    .active {
+      display: block;
+    }
+    video {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px 0;
+      border: 2px solid #444;
+      border-radius: 8px;
+    }
+    .controls {
+      text-align: center;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Elemento de vídeo único -->
+  <div id="video-wrapper">
+    <video id="shared-video" controls>
+      <source src="video.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+  <!-- Seções -->
+  <div id="sections">
+    <div class="section" id="sec-0">
+      <h2>Seção 1</h2>
+      <p>Conteúdo da primeira seção.</p>
+    </div>
+    <div class="section" id="sec-1">
+      <h2>Seção 2</h2>
+      <p>Conteúdo da segunda seção.</p>
+    </div>
+    <div class="section" id="sec-2">
+      <h2>Seção 3</h2>
+      <p>Conteúdo da terceira seção.</p>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <div class="controls">
+    <button onclick="showSection(0)">Seção 1</button>
+    <button onclick="showSection(1)">Seção 2</button>
+    <button onclick="showSection(2)">Seção 3</button>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const video = document.getElementById('shared-video');
+
+    function showSection(index) {
+      sections.forEach((sec, i) => {
+        sec.classList.remove('active');
+      });
+
+      const target = sections[index];
+      target.classList.add('active');
+
+      // Move o vídeo para dentro da seção ativa
+      target.appendChild(video);
+    }
+
+    // Exibe a primeira seção ao carregar
+    window.onload = () => showSection(0);
+  </script>
+</body>
+</html>
