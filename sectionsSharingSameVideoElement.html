@@ -76,24 +76,31 @@
     <button onclick="showSection(2)">Seção 3</button>
   </div>
 
-  <script>
-    const sections = document.querySelectorAll('.section');
-    const video = document.getElementById('shared-video');
+<script>
+  const sections = document.querySelectorAll('.section');
+  const video = document.getElementById('shared-video');
 
-    function showSection(index) {
-      sections.forEach((sec, i) => {
-        sec.classList.remove('active');
-      });
+  function showSection(index) {
+    // Oculta todas as seções
+    sections.forEach((sec) => sec.classList.remove('active'));
 
-      const target = sections[index];
-      target.classList.add('active');
+    // Exibe a seção desejada
+    const target = sections[index];
+    target.classList.add('active');
 
-      // Move o vídeo para dentro da seção ativa
-      target.appendChild(video);
+    // Remove o vídeo de onde estiver
+    if (video.parentElement) {
+      video.remove();
     }
 
-    // Exibe a primeira seção ao carregar
-    window.onload = () => showSection(0);
-  </script>
+    // Só insere o vídeo nas seções 1 e 3 (índices 0 e 2)
+    if (index === 0 || index === 1 || index === 3) {
+      target.appendChild(video);
+      video.style.display = 'block'; // garante que o vídeo esteja visível
+    }
+  }
+
+  window.onload = () => showSection(0);
+</script>
 </body>
 </html>
